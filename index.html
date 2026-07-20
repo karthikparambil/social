@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deep Neomorphic Portfolio</title>
+    <title>Karthik P | Cybersecurity Researcher & Penetration Tester</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -29,725 +29,7 @@
         }
     </script>
 
-    <style>
-        body {
-            background-color: #4A4870;
-            background-image: radial-gradient(circle at top left, #5B5985 0%, #4A4870 100%);
-            color: #F3F3F9;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        /* Highly realistic 3D Card */
-        .glass-card-3d {
-            background: linear-gradient(135deg, #7471A4 0%, #5E5B86 100%);
-            border-radius: 40px;
-            /* Complex shadow: ambient drop shadow + rim light + inner dark shadow */
-            box-shadow:
-                25px 25px 50px rgba(25, 23, 45, 0.6),
-                -15px -15px 35px rgba(135, 130, 185, 0.2),
-                inset 2px 2px 4px rgba(255, 255, 255, 0.3),
-                inset -2px -2px 4px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            position: relative;
-        }
-
-        /* Recessed Inner Panel (like the dark info box in ref) */
-        .recessed-dark {
-            background: linear-gradient(135deg, #2E2C4D 0%, #38355B 100%);
-            border-radius: 30px;
-            box-shadow:
-                inset 10px 10px 20px rgba(15, 14, 25, 0.8),
-                inset -5px -5px 15px rgba(80, 75, 120, 0.3),
-                1px 1px 2px rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(0, 0, 0, 0.4);
-        }
-
-        /* 3D Navigation Icons Bar */
-        .nav-bar-recessed {
-            background: #5E5B86;
-            border-radius: 24px;
-            box-shadow: inset 8px 8px 15px rgba(35, 33, 60, 0.5), inset -8px -8px 15px rgba(120, 115, 170, 0.3);
-            display: inline-flex;
-            position: relative;
-            z-index: 50;
-        }
-
-        .nav-btn-3d {
-            width: 55px;
-            height: 55px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, #D7D6FB 0%, #B8B6E3 100%);
-            color: #4A4870;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow:
-                6px 6px 12px rgba(30, 28, 50, 0.4),
-                -4px -4px 8px rgba(255, 255, 255, 0.6),
-                inset 1px 1px 2px rgba(255, 255, 255, 0.8);
-            transition: all 0.2s ease-in-out;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-        }
-
-        .nav-btn-3d:active {
-            transform: scale(0.95);
-            box-shadow:
-                2px 2px 5px rgba(30, 28, 50, 0.4),
-                -1px -1px 3px rgba(255, 255, 255, 0.6),
-                inset 4px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Pill Buttons */
-        .btn-pill-3d {
-            background: linear-gradient(135deg, #E6E5FF 0%, #C8C7F0 100%);
-            color: #323054;
-            border-radius: 9999px;
-            padding: 0.6rem 1.5rem;
-            font-weight: 800;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
-            box-shadow:
-                5px 5px 12px rgba(30, 28, 50, 0.4),
-                -3px -3px 8px rgba(255, 255, 255, 0.4),
-                inset 2px 2px 3px rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            transition: transform 0.1s, box-shadow 0.1s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-pill-3d:active {
-            transform: translateY(2px);
-            box-shadow:
-                2px 2px 5px rgba(30, 28, 50, 0.4),
-                inset 3px 3px 6px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Speech Bubbles Setup */
-        .bubble-light {
-            background: linear-gradient(135deg, #F0EFFF 0%, #D7D6FB 100%);
-            color: #323054;
-            border-radius: 30px;
-            position: relative;
-            box-shadow:
-                15px 15px 25px rgba(30, 28, 50, 0.4),
-                -5px -5px 15px rgba(255, 255, 255, 0.1),
-                inset 2px 2px 5px rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            z-index: 10;
-        }
-
-        /* Left bubble tail */
-        .bubble-left::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: 50px;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, transparent 50%, #D7D6FB 50%);
-            border-bottom-right-radius: 10px;
-            transform: rotate(45deg);
-            box-shadow: 8px 8px 10px rgba(30, 28, 50, 0.2);
-            z-index: -1;
-        }
-
-        /* Right bubble overlapping */
-        .bubble-right {
-            z-index: 20;
-            box-shadow:
-                -10px 15px 30px rgba(20, 18, 40, 0.6),
-                /* Heavy cast shadow onto left bubble */
-                15px 15px 25px rgba(30, 28, 50, 0.3),
-                inset 2px 2px 5px rgba(255, 255, 255, 0.9);
-        }
-
-        .bubble-right::after {
-            content: '';
-            position: absolute;
-            top: -15px;
-            right: 50px;
-            width: 30px;
-            height: 30px;
-            background: #E8E7FD;
-            border-top-left-radius: 8px;
-            transform: rotate(45deg);
-            z-index: -1;
-        }
-
-        /* Top Outline Text */
-        .text-outline {
-            color: transparent;
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            text-shadow: 4px 4px 10px rgba(30, 28, 50, 0.3);
-        }
-
-        /* Floating 3D CSS Elements */
-        .float-animation {
-            animation: float-3d 6s ease-in-out infinite;
-        }
-
-        .float-animation-delayed {
-            animation: float-3d 7s ease-in-out infinite 2s;
-        }
-
-        @keyframes float-3d {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(-15px) rotate(3deg);
-            }
-
-            100% {
-                transform: translateY(0) rotate(0deg);
-            }
-        }
-
-        /* Rocket Launch Animation */
-        .fly-away-active {
-            animation: rocket-launch 1.2s cubic-bezier(0.5, 0, 0.2, 1) forwards !important;
-        }
-
-        @keyframes rocket-launch {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
-
-            15% {
-                transform: translateY(20px) rotate(0deg);
-            }
-
-            /* Pre-launch dip */
-            100% {
-                transform: translateY(-1500px) rotate(10deg);
-                opacity: 0;
-            }
-        }
-
-        /* Rocket Arrival Animation (The Next Rocket) */
-        .rocket-arrive-active {
-            animation: rocket-arrive 1s cubic-bezier(0.2, 1, 0.3, 1) forwards !important;
-        }
-
-        @keyframes rocket-arrive {
-            0% {
-                transform: translateY(1000px) rotate(-10deg);
-                opacity: 0;
-            }
-
-            100% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-        }
-
-        /* CSS Planet (Mimicking the reference 3D items) */
-        .css-planet {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #fff 0%, #D7D6FB 40%, #8C89C7 80%, #323054 100%);
-            box-shadow:
-                -15px 20px 30px rgba(20, 18, 40, 0.7),
-                inset -10px -10px 20px rgba(0, 0, 0, 0.4);
-            position: relative;
-        }
-
-        .css-planet-ring {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 150px;
-            height: 40px;
-            border: 12px solid rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) rotate(20deg);
-            box-shadow:
-                0px 10px 15px rgba(0, 0, 0, 0.3),
-                inset 0px 2px 5px rgba(0, 0, 0, 0.5);
-            /* Hide back half of ring */
-            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
-        }
-
-        @media (max-width: 768px) {
-            .nav-btn-3d {
-                width: 45px;
-                height: 45px;
-                font-size: 1.2rem;
-                border-radius: 14px;
-            }
-
-            .bubble-left::after {
-                bottom: -15px;
-                left: 30px;
-                width: 30px;
-                height: 30px;
-            }
-
-            .bubble-right {
-                /* Fix shadow direction for vertical stack (casting up onto first bubble) */
-                box-shadow:
-                    0px -15px 25px rgba(20, 18, 40, 0.5),
-                    10px 10px 20px rgba(30, 28, 50, 0.3),
-                    inset 2px 2px 5px rgba(255, 255, 255, 0.9);
-                z-index: 20;
-            }
-
-            .bubble-right::after {
-                top: -10px;
-                right: 30px;
-                width: 20px;
-                height: 20px;
-            }
-
-            .text-outline {
-                text-shadow: 2px 2px 5px rgba(30, 28, 50, 0.3);
-                -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.5);
-            }
-        }
-
-        /* ── Buy Me a Coffee Section ── */
-        .bmc-section {
-            background: #44426A;
-            border-radius: 32px;
-            box-shadow:
-                22px 22px 44px rgba(22, 20, 42, 0.65),
-                -12px -12px 30px rgba(115, 110, 168, 0.22);
-        }
-
-        .bmc-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-            padding: 1.75rem 2.25rem;
-            flex-wrap: wrap;
-        }
-
-        .bmc-left {
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-            flex: 1;
-            min-width: 0;
-        }
-
-        .bmc-text {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-
-        .bmc-icon-wrap {
-            width: 60px;
-            height: 60px;
-            border-radius: 18px;
-            flex-shrink: 0;
-            background: #44426A;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow:
-                6px 6px 14px rgba(22, 20, 42, 0.7),
-                -4px -4px 10px rgba(115, 110, 168, 0.25),
-                inset 1px 1px 1px rgba(255, 255, 255, 0.07);
-            animation: bmc-float 4s ease-in-out infinite;
-        }
-
-        .bmc-coffee-emoji {
-            font-size: 1.9rem;
-            filter: drop-shadow(0 3px 6px rgba(255, 186, 8, 0.4));
-        }
-
-        @keyframes bmc-float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-5px);
-            }
-        }
-
-        .bmc-heading {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #E8E6FF;
-            letter-spacing: -0.01em;
-            margin: 0;
-        }
-
-        .bmc-sub {
-            font-size: 0.76rem;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.38);
-            line-height: 1.5;
-            margin: 0;
-        }
-
-        .bmc-supporters {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.68rem;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.28);
-            margin-top: 0.15rem;
-        }
-
-        .bmc-supporters strong {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .bmc-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #FFBA08;
-            opacity: 0.7;
-            flex-shrink: 0;
-            animation: bmc-pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes bmc-pulse {
-
-            0%,
-            100% {
-                opacity: 0.7;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scale(1.3);
-            }
-        }
-
-        .bmc-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.55rem;
-            background: #FFBA08;
-            color: #2E2C1A;
-            font-weight: 800;
-            font-size: 0.88rem;
-            padding: 0.7rem 1.75rem;
-            border-radius: 50px;
-            text-decoration: none;
-            white-space: nowrap;
-            flex-shrink: 0;
-            border: none;
-            cursor: pointer;
-            box-shadow:
-                6px 6px 14px rgba(22, 20, 42, 0.5),
-                -3px -3px 8px rgba(255, 220, 80, 0.15),
-                inset 1px 1px 2px rgba(255, 255, 255, 0.5);
-            transition: transform 0.18s ease, box-shadow 0.18s ease;
-            letter-spacing: 0.02em;
-        }
-
-        .bmc-btn:hover {
-            transform: translateY(-2px);
-            box-shadow:
-                10px 10px 24px rgba(22, 20, 42, 0.6),
-                -4px -4px 12px rgba(255, 220, 80, 0.2),
-                0 0 28px rgba(255, 186, 8, 0.3),
-                inset 1px 1px 2px rgba(255, 255, 255, 0.5);
-        }
-
-        .bmc-btn:active {
-            transform: translateY(0);
-            box-shadow:
-                inset 4px 4px 10px rgba(0, 0, 0, 0.2),
-                inset -2px -2px 6px rgba(255, 220, 80, 0.15);
-        }
-
-        .bmc-btn-icon {
-            font-size: 1.1rem;
-        }
-
-        @media (max-width: 640px) {
-            .bmc-inner {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 1.25rem 1.5rem;
-                gap: 1.25rem;
-            }
-
-            .bmc-btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-
-        .handles-section {
-            /* Flat base — same tone as main bg so neomorphic shadows read correctly */
-            background: #44426A;
-            border-radius: 36px;
-            box-shadow:
-                22px 22px 44px rgba(22, 20, 42, 0.65),
-                -12px -12px 30px rgba(115, 110, 168, 0.22);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .handles-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at 12% 0%, rgba(180, 176, 230, 0.07) 0%, transparent 55%);
-            pointer-events: none;
-            border-radius: 36px;
-        }
-
-        .handles-label {
-            font-size: 0.6rem;
-            font-weight: 800;
-            letter-spacing: 0.28em;
-            color: rgba(255, 255, 255, 0.28);
-            text-transform: uppercase;
-        }
-
-        /* Neomorphic card base */
-        .hcard {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: space-between;
-            border-radius: 20px;
-            padding: 1.1rem 1.1rem 1rem;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            /* Same flat colour as parent for true neomorphism */
-            background: #44426A;
-            /* Raised state: dark shadow bottom-right, light shadow top-left */
-            box-shadow:
-                8px 8px 18px rgba(22, 20, 42, 0.7),
-                -5px -5px 14px rgba(115, 110, 168, 0.25),
-                inset 1px 1px 1px rgba(255, 255, 255, 0.07);
-            min-height: 108px;
-            transition: box-shadow 0.2s ease, transform 0.2s ease;
-            border: none;
-        }
-
-
-
-        /* Hover: slightly more raised */
-        .hcard:hover {
-            box-shadow:
-                12px 12px 26px rgba(22, 20, 42, 0.75),
-                -7px -7px 18px rgba(115, 110, 168, 0.3),
-                inset 1px 1px 2px rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        /* Active / pressed: invert to recessed */
-        .hcard:active {
-            box-shadow:
-                inset 5px 5px 12px rgba(22, 20, 42, 0.7),
-                inset -4px -4px 10px rgba(115, 110, 168, 0.2);
-            transform: translateY(0);
-        }
-
-        .hcard-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.55rem;
-            display: flex;
-            align-items: center;
-            /* Neomorphic icon container */
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            justify-content: center;
-            background: #44426A;
-            box-shadow:
-                4px 4px 10px rgba(22, 20, 42, 0.65),
-                -3px -3px 8px rgba(115, 110, 168, 0.22),
-                inset 1px 1px 1px rgba(255, 255, 255, 0.08);
-        }
-
-        .hcard-platform {
-            font-size: 0.52rem;
-            font-weight: 800;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.35);
-            margin-bottom: 0.2rem;
-        }
-
-        .hcard-handle {
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: #D4D2F8;
-            letter-spacing: 0.01em;
-        }
-
-        /* Brand accent colours — only for the top bar + icon tint */
-        .hc-ig {
-            --accent: linear-gradient(90deg, #833ab4, #fd1d1d, #fcb045);
-        }
-
-        .hc-ig .hcard-icon {
-            color: #f77737;
-        }
-
-        .hc-x {
-            --accent: #e7e7e7;
-        }
-
-        .hc-x .hcard-icon {
-            color: #e7e7e7;
-        }
-
-        .hc-yt {
-            --accent: #ff4444;
-        }
-
-        .hc-yt .hcard-icon {
-            color: #ff4444;
-        }
-
-        .hc-dc {
-            --accent: #7983f5;
-        }
-
-        .hc-dc .hcard-icon {
-            color: #7983f5;
-        }
-
-        .hc-dev {
-            --accent: #c9c9c9;
-        }
-
-        .hc-dev .hcard-icon {
-            color: #c9c9c9;
-        }
-
-        .hc-reddit {
-            --accent: #ff5a00;
-        }
-
-        .hc-reddit .hcard-icon {
-            color: #ff5a00;
-        }
-
-        .hc-ph {
-            --accent: #da491c;
-        }
-
-        .hc-ph .hcard-icon {
-            color: #da491c;
-        }
-
-        .hc-copy {
-            --accent: #8C89C7;
-        }
-
-        .hc-copy .hcard-icon {
-            color: #8C89C7;
-        }
-
-        @keyframes hcard-in {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hcard {
-            animation: hcard-in 0.35s ease both;
-        }
-
-        /* Ghost decorative icon */
-        .hcard-bg-icon {
-            position: absolute;
-            right: -6px;
-            bottom: -8px;
-            font-size: 3.5rem;
-            opacity: 0.05;
-            pointer-events: none;
-            line-height: 1;
-        }
-
-        /* Responsive Mobile Tweak: Shorter, horizontal cards on small screens */
-        @media (max-width: 640px) {
-            .hcard {
-                flex-direction: row;
-                align-items: center;
-                justify-content: flex-start;
-                gap: 0.75rem;
-                min-height: 56px;
-                padding: 0.5rem 0.75rem;
-                border-radius: 16px;
-            }
-
-            .hcard-icon {
-                width: 32px;
-                height: 32px;
-                font-size: 1.1rem;
-                margin-bottom: 0;
-                border-radius: 10px;
-                flex-shrink: 0;
-                box-shadow:
-                    2px 2px 5px rgba(22, 20, 42, 0.6),
-                    -2px -2px 5px rgba(115, 110, 168, 0.22),
-                    inset 1px 1px 1px rgba(255, 255, 255, 0.08);
-            }
-
-            .hcard-platform {
-                margin-bottom: 0px;
-                font-size: 0.48rem;
-                letter-spacing: 0.15em;
-            }
-
-            .hcard-handle {
-                font-size: 0.72rem;
-                word-break: break-all;
-            }
-
-            .hcard-bg-icon {
-                display: none;
-            }
-        }
-
-        /* Responsive grid layout */
-        .handles-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-
-        @media (max-width: 1024px) {
-            .handles-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .handles-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="flex flex-col items-center py-6 md:py-12 px-4 md:px-8 font-sans">
@@ -761,37 +43,41 @@
                 <h1 class="text-4xl sm:text-6xl md:text-8xl text-outline m-0 leading-none">PORTFOLIO</h1>
                 <p
                     class="text-[10px] sm:text-xs md:text-sm tracking-[0.2em] md:tracking-[0.3em] text-white font-bold ml-1 md:ml-2 mt-1">
-                    SOFTWARE ENGINEER</p>
+                    CYBERSECURITY RESEARCHER & JR. PENETRATION TESTER</p>
             </div>
 
             <!-- Profile Content Area -->
-            <div class="relative z-10 mt-20 md:mt-28 flex flex-col lg:flex-row gap-8 items-center lg:items-stretch">
+            <div class="relative z-10 mt-12 md:mt-28 flex flex-col lg:flex-row gap-8 items-center lg:items-stretch">
 
                 <!-- Recessed Dark Panel for Profile Info -->
                 <div
-                    class="recessed-dark p-5 pt-20 md:pt-8 md:p-8 flex-1 w-full flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-8 relative mt-12 md:mt-0">
+                    class="recessed-dark p-4 pt-14 sm:p-6 sm:pt-16 md:pt-8 md:p-8 flex-1 w-full flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-8 relative mt-8 md:mt-0">
 
                     <!-- Profile Picture with 3D Pop -->
-                    <div class="relative shrink-0 absolute -top-16 md:relative md:top-0 z-20">
+                    <div class="relative shrink-0 absolute -top-4 md:relative md:top-0 z-20">
                         <div
-                            class="w-32 h-32 md:w-40 md:h-40 rounded-[2rem] overflow-hidden p-1.5 md:p-2 bg-gradient-to-br from-[#D7D6FB] to-[#8C89C7] shadow-[10px_10px_20px_rgba(0,0,0,0.5)]">
-                            <img src="https://placehold.co/400x400/323054/D7D6FB?text=Photo" alt="Profile"
+                            class="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-[2rem] overflow-hidden p-1.5 md:p-2 bg-gradient-to-br from-[#D7D6FB] to-[#8C89C7] shadow-[10px_10px_20px_rgba(0,0,0,0.5)]">
+                            <img src="assets/karthik_portrait.png" alt="Profile"
                                 class="w-full h-full object-cover rounded-3xl shadow-inner border border-white/20">
                         </div>
                     </div>
 
-                    <div class="text-center md:text-left flex-1 mt-2 md:mt-0 w-full">
-                        <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3">John Doe</h2>
-                        <p class="text-[#B8B6E3] font-semibold mb-6 leading-relaxed text-xs md:text-base">
-                            Building immersive, realistic web experiences. Passionate about 3D interfaces, neomorphism,
-                            and clean code architecture.
+                    <div class="text-center md:text-left flex-1 mt-1 md:mt-0 w-full">
+                        <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3">Karthik P</h2>
+                        <p class="font-medium mb-5 md:mb-6 leading-relaxed text-xs sm:text-sm md:text-base tracking-wide"
+                            style="color: #FFFFFF !important;">
+                            Cybersecurity Researcher & Jr. Penetration Tester. Specialized in network pentesting, Active
+                            Directory exploitation, OWASP Top 10 vulnerabilities, CTF lab development, and security tool
+                            automation.
                         </p>
 
                         <div class="flex flex-wrap justify-center md:justify-start gap-3 md:gap-4">
-                            <a href="#" class="btn-pill-3d uppercase">
+                            <a href="mailto:karthikparambil9@gmail.com?subject=Hiring%20Inquiry%20-%20Karthik%20P"
+                                class="btn-pill-3d uppercase text-xs">
                                 Hire Me
                             </a>
-                            <a href="#" class="btn-pill-3d uppercase bg-none bg-[#5E5B86] text-white border-white/20"
+                            <a href="assets/resume.pdf" target="_blank"
+                                class="btn-pill-3d uppercase text-xs bg-none bg-[#5E5B86] text-white border-white/20"
                                 style="background: linear-gradient(135deg, #726F9E, #4A4870);">
                                 Download CV
                             </a>
@@ -808,10 +94,10 @@
         </section>
 
         <!-- Center Overlapping Nav Menu -->
-        <div class="nav-bar-recessed -mt-8 md:-mt-12 mb-2 p-2 md:p-3 gap-2 sm:gap-4">
-            <a href="#" class="nav-btn-3d" title="Home"><i class="fas fa-home"></i></a>
-            <a href="#" class="nav-btn-3d" title="Portfolio">
-                <!-- Updated SVG for Portfolio Folder -->
+        <div class="nav-bar-recessed -mt-6 md:-mt-12 mb-2 p-2 md:p-3 gap-2 sm:gap-4">
+            <a href="https://karthikparambil.github.io" target="_blank" rel="noopener" class="nav-btn-3d"
+                title="CTF Platform">
+                <!-- Updated SVG for Portfolio / CTF Lab -->
                 <svg viewBox="0 0 24 24" class="w-6 h-6 md:w-7 md:h-7">
                     <!-- Doc 1 (Back) -->
                     <path d="M 5 8 V 4 C 5 2.9 5.9 2 7 2 H 14 C 15.1 2 16 2.9 16 4 V 9" fill="#D7D6FB" stroke="#4A4870"
@@ -835,8 +121,10 @@
                     <line x1="13.5" y1="17" x2="18" y2="17" stroke="#4A4870" stroke-width="2" stroke-linecap="round" />
                 </svg>
             </a>
-            <a href="#" class="nav-btn-3d" title="Github"><i class="fab fa-github"></i></a>
-            <a href="#" class="nav-btn-3d" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/karthikparambil" target="_blank" rel="noopener" class="nav-btn-3d"
+                title="Github"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/karthikparambil9" target="_blank" rel="noopener" class="nav-btn-3d"
+                title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             <button onclick="shareProfile()" class="nav-btn-3d" title="Share"><i class="fas fa-share-nodes"
                     id="share-icon"></i></button>
         </div>
@@ -847,7 +135,7 @@
             <!-- Top Right Tab -->
             <div class="absolute top-4 right-4 md:top-6 md:right-12 z-40">
                 <div
-                    class="border border-white/30 rounded-full px-4 py-1.5 md:px-6 md:py-2 text-[10px] md:text-xs font-bold tracking-widest text-white shadow-[0_4px_10px_rgba(0,0,0,0.2)] bg-white/10 backdrop-blur-md">
+                    class="border border-white/30 rounded-full px-3 py-1 md:px-6 md:py-2 text-[9px] sm:text-[10px] md:text-xs font-bold tracking-wider sm:tracking-widest text-white shadow-[0_4px_10px_rgba(0,0,0,0.2)] bg-white/10 backdrop-blur-md">
                     ABOUT & CONTACT
                 </div>
             </div>
@@ -860,92 +148,68 @@
                 </div>
             </div>
 
-            <div class="mt-16 md:mt-20 relative flex flex-col md:flex-row gap-0 md:gap-0">
+            <div class="mt-12 md:mt-20 relative flex flex-col md:flex-row gap-5 md:gap-0 items-stretch md:items-center">
 
-                <!-- Left Bubble (Contact / Bio) -->
-                <div class="bubble-light bubble-left md:w-3/5 md:-mr-10 md:mb-10 min-h-[250px] p-6 md:p-8">
-                    <h3 class="font-extrabold text-base md:text-lg mb-4 text-[#4A4870] flex items-center gap-2">
-                        <i class="fas fa-address-card"></i> Let's Connect
+                <!-- Left Bubble (Contact & Bio) -->
+                <div
+                    class="bubble-light bubble-left w-full md:w-3/5 md:-mr-10 md:mb-10 min-h-0 md:min-h-[250px] p-5 sm:p-6 md:p-8">
+                    <h3 class="font-extrabold text-base md:text-lg mb-3 md:mb-4 text-[#4A4870] flex items-center gap-2">
+                        <i class="fas fa-user-shield"></i> About & Contact
                     </h3>
-                    <p class="text-xs md:text-sm font-semibold leading-relaxed mb-6 text-[#5E5B86]">
-                        I'm currently open for new opportunities. Whether you have a question or just want to say hi,
-                        I'll try my best to get back to you! My primary stack includes React, Tailwind, and Node.js.
+                    <p class="text-xs md:text-sm font-semibold leading-relaxed mb-5 md:mb-6 text-[#5E5B86]">
+                        Cybersecurity Researcher & R&D Member at Offenso Hackers Academy. Passionate about offensive
+                        security, Active Directory attacks, web vulnerability research, and custom tool engineering.
                     </p>
 
-                    <ul class="space-y-4 text-xs md:text-sm font-bold text-[#4A4870]">
+                    <ul class="space-y-2.5 md:space-y-3 text-xs md:text-sm font-bold text-[#4A4870]">
                         <li class="flex items-center gap-3 md:gap-4">
                             <div
-                                class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-[#5E5B86] text-white flex items-center justify-center shadow-[inset_2px_2px_5px_rgba(255,255,255,0.3),_4px_4px_10px_rgba(0,0,0,0.2)]">
+                                class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-[#5E5B86] text-white flex items-center justify-center shadow-[inset_2px_2px_5px_rgba(255,255,255,0.3),_4px_4px_10px_rgba(0,0,0,0.2)] shrink-0">
                                 <i class="fas fa-envelope"></i>
                             </div>
-                            <a href="mailto:hello@example.com"
-                                class="hover:text-accent transition-colors break-all">hello@example.com</a>
+                            <a href="mailto:karthikparambil9@gmail.com"
+                                class="hover:text-accent transition-colors break-all">karthikparambil9@gmail.com</a>
                         </li>
                         <li class="flex items-center gap-3 md:gap-4">
                             <div
-                                class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-[#5E5B86] text-white flex items-center justify-center shadow-[inset_2px_2px_5px_rgba(255,255,255,0.3),_4px_4px_10px_rgba(0,0,0,0.2)]">
+                                class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-[#5E5B86] text-white flex items-center justify-center shadow-[inset_2px_2px_5px_rgba(255,255,255,0.3),_4px_4px_10px_rgba(0,0,0,0.2)] shrink-0">
                                 <i class="fas fa-phone"></i>
                             </div>
-                            <a href="tel:+1234567890" class="hover:text-accent transition-colors">+1 (234) 567-890</a>
+                            <a href="tel:+918594069844" class="hover:text-accent transition-colors">+91 8590359509</a>
+                        </li>
+                        <li class="flex items-center gap-3 md:gap-4">
+                            <div
+                                class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-[#5E5B86] text-white flex items-center justify-center shadow-[inset_2px_2px_5px_rgba(255,255,255,0.3),_4px_4px_10px_rgba(0,0,0,0.2)] shrink-0">
+                                <i class="fas fa-location-dot"></i>
+                            </div>
+                            <span class="text-[#4A4870]">Malappuram, Kerala, India</span>
                         </li>
                     </ul>
 
                     <!-- Small inner pill -->
-                    <div class="mt-6">
-                        <a href="#" class="btn-pill-3d text-[10px] md:text-xs px-3 py-1.5 md:px-4 md:py-2 bg-white"><i
-                                class="fas fa-arrow-right"></i> Send Mail</a>
+                    <div class="mt-5 md:mt-6">
+                        <a href="mailto:karthikparambil9@gmail.com?subject=Inquiry%20from%20Portfolio"
+                            class="btn-pill-3d text-[10px] md:text-xs px-3 py-1.5 md:px-4 md:py-2 bg-white"><i
+                                class="fas fa-paper-plane"></i> Send Mail</a>
                     </div>
                 </div>
 
-                <!-- Right Bubble (Skills / Links) - Overlaps Left Bubble -->
-                <div class="bubble-light bubble-right md:w-1/2 -mt-4 md:mt-24 md:-ml-12 min-h-[200px] p-6 md:p-8">
-                    <h3 class="font-extrabold text-base md:text-lg mb-4 text-[#4A4870] flex items-center gap-2">
-                        <i class="fas fa-layer-group"></i> Expertise
+                <!-- Right Bubble (Current Role) -->
+                <div
+                    class="bubble-light bubble-right w-full md:w-1/2 mt-2 md:mt-12 md:-ml-12 p-5 md:p-6 self-stretch md:self-center">
+                    <h3 class="font-extrabold text-sm md:text-base mb-2 text-[#4A4870] flex items-center gap-2">
+                        <i class="fas fa-briefcase text-[#8C89C7]"></i> Current Role
                     </h3>
-                    <p class="text-xs md:text-sm font-semibold leading-relaxed mb-6 text-[#5E5B86]">
-                        Specialized in creating highly tactile, realistic user interfaces. Bridging the gap between 3D
-                        design software aesthetics and functional web performance.
-                    </p>
 
-                    <div class="grid grid-cols-2 gap-2 md:gap-3">
-                        <a href="#"
-                            class="bg-[#E6E5FF] rounded-xl p-2 md:p-3 text-center shadow-[4px_4px_8px_rgba(0,0,0,0.1),_inset_1px_1px_2px_#fff] border border-white hover:-translate-y-1 transition-transform">
-                            <!-- Updated SVG for Portfolio Folder -->
-                            <svg viewBox="0 0 24 24" class="w-6 h-6 md:w-7 md:h-7 mx-auto mb-1 block">
-                                <!-- Doc 1 (Back) -->
-                                <path d="M 5 8 V 4 C 5 2.9 5.9 2 7 2 H 14 C 15.1 2 16 2.9 16 4 V 9" fill="#E6E5FF"
-                                    stroke="#4A4870" stroke-width="2" stroke-linecap="round" />
-                                <!-- Doc 2 (Front) -->
-                                <path d="M 8 9 V 5 C 8 3.9 8.9 3 10 3 H 17 C 18.1 3 19 3.9 19 5 V 10" fill="#E6E5FF"
-                                    stroke="#4A4870" stroke-width="2" stroke-linecap="round" />
-                                <!-- Folder -->
-                                <path
-                                    d="M 3 20 V 10 C 3 8.9 3.9 8 5 8 H 10 C 10.5 8 11 8.2 11.5 8.6 L 13 10 H 20 C 21.1 10 22 10.9 22 12 V 20 C 22 21.1 21.1 22 20 22 H 5 C 3.9 22 3 21.1 3 20 Z"
-                                    fill="#E6E5FF" stroke="#4A4870" stroke-width="2" stroke-linejoin="round" />
-                                <!-- Profile Circle -->
-                                <circle cx="8.5" cy="15.5" r="3" fill="#E6E5FF" stroke="#4A4870" stroke-width="2" />
-                                <!-- Profile Head -->
-                                <circle cx="8.5" cy="14.2" r="1" fill="none" stroke="#4A4870" stroke-width="1.5" />
-                                <!-- Profile Body -->
-                                <path d="M 6.5 17.5 C 6.5 16.5 7.2 15.8 8.5 15.8 C 9.8 15.8 10.5 16.5 10.5 17.5"
-                                    fill="none" stroke="#4A4870" stroke-width="1.5" stroke-linecap="round" />
-                                <!-- Lines -->
-                                <line x1="13.5" y1="14" x2="18" y2="14" stroke="#4A4870" stroke-width="2"
-                                    stroke-linecap="round" />
-                                <line x1="13.5" y1="17" x2="18" y2="17" stroke="#4A4870" stroke-width="2"
-                                    stroke-linecap="round" />
-                            </svg>
-                            <span class="text-[10px] md:text-xs font-bold text-[#4A4870]">Portfolio</span>
-                        </a>
-                        <div
-                            class="bg-[#E6E5FF] rounded-xl p-2 md:p-3 text-center shadow-[4px_4px_8px_rgba(0,0,0,0.1),_inset_1px_1px_2px_#fff] border border-white">
-                            <!-- Custom SVG mimicking the thick code icon -->
-                            <svg viewBox="0 0 24 24" class="w-6 h-6 md:w-7 md:h-7 mx-auto mb-1 block">
-                                <path d="M 8 7 L 3 12 L 8 17 M 16 7 L 21 12 L 16 17 M 14 5 L 10 19" stroke="#4A4870"
-                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                            </svg>
-                            <span class="text-[10px] md:text-xs font-bold text-[#4A4870]">Frontend</span>
-                        </div>
+                    <div class="text-[#4A4870]">
+                        <h4 class="font-extrabold text-xs md:text-sm text-[#4A4870]">
+                            Cybersecurity Intern & R&D
+                        </h4>
+                        <p class="text-xs font-bold text-[#5E5B86] mt-1">
+                            Offenso Hackers Academy <span
+                                class="text-[10px] font-semibold text-[#8C89C7] block sm:inline"> July 2025 – Present
+                            </span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1008,32 +272,25 @@
                     <p style="font-size:0.68rem;color:rgba(255,255,255,0.35);font-weight:600;margin-top:2px">Secondary
                         handles — not super active, but I'm there!</p>
                 </div>
-                <div class="ml-auto hidden sm:flex items-center gap-1.5 rounded-full px-3 py-1"
-                    style="border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04)">
-                    <span
-                        style="width:6px;height:6px;border-radius:50%;background:rgba(250,204,21,0.7);display:inline-block"
-                        class="animate-pulse"></span>
-                    <span
-                        style="font-size:8px;font-weight:800;letter-spacing:.2em;color:rgba(255,255,255,0.25)">CASUAL</span>
-                </div>
             </div>
 
             <!-- Bento Grid -->
             <div class="handles-grid">
 
                 <!-- Instagram -->
-                <a href="#" class="hcard hc-ig" style="animation-delay:.05s">
+                <a href="https://www.instagram.com/_k6thik_/" target="_blank" class="hcard hc-ig"
+                    style="animation-delay:.05s">
                     <i class="fab fa-instagram hcard-icon"
                         style="background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);-webkit-background-clip:text;-webkit-text-fill-color:transparent"></i>
                     <div>
                         <p class="hcard-platform">Instagram</p>
-                        <p class="hcard-handle">@johndoe</p>
+                        <p class="hcard-handle">@_k6thik_</p>
                     </div>
                     <i class="fab fa-instagram hcard-bg-icon"></i>
                 </a>
 
-                <!-- X -->
-                <a href="#" class="hcard hc-x" style="animation-delay:.10s">
+                <!-- X / Twitter -->
+                <a href="https://x.com/KarthikPar22109" target="_blank" class="hcard hc-x" style="animation-delay:.10s">
                     <span class="hcard-icon">
                         <svg viewBox="0 0 24 24" style="width:1.5rem;height:1.5rem;fill:white">
                             <path
@@ -1042,70 +299,32 @@
                     </span>
                     <div>
                         <p class="hcard-platform">X / Twitter</p>
-                        <p class="hcard-handle">@johndoe_x</p>
+                        <p class="hcard-handle">@KarthikPar22109</p>
                     </div>
-                </a>
-
-                <!-- YouTube -->
-                <a href="#" class="hcard hc-yt" style="animation-delay:.15s">
-                    <i class="fab fa-youtube hcard-icon" style="color:#ff4444"></i>
-                    <div>
-                        <p class="hcard-platform">YouTube</p>
-                        <p class="hcard-handle">John Doe</p>
-                    </div>
-                    <i class="fab fa-youtube hcard-bg-icon"></i>
-                </a>
-
-                <!-- Discord -->
-                <a href="#" class="hcard hc-dc" style="animation-delay:.20s">
-                    <i class="fab fa-discord hcard-icon" style="color:#7983f5"></i>
-                    <div>
-                        <p class="hcard-platform">Discord</p>
-                        <p class="hcard-handle">johndoe#1234</p>
-                    </div>
-                    <i class="fab fa-discord hcard-bg-icon"></i>
-                </a>
-
-                <!-- Dev.to -->
-                <a href="#" class="hcard hc-dev" style="animation-delay:.25s">
-                    <i class="fab fa-dev hcard-icon" style="color:#fff"></i>
-                    <div>
-                        <p class="hcard-platform">Dev.to</p>
-                        <p class="hcard-handle">dev.to/johndoe</p>
-                    </div>
-                    <i class="fab fa-dev hcard-bg-icon"></i>
                 </a>
 
                 <!-- Reddit -->
-                <a href="#" class="hcard hc-reddit" style="animation-delay:.30s">
+                <a href="https://www.reddit.com/user/karthik_p9/" target="_blank" class="hcard hc-reddit"
+                    style="animation-delay:.15s">
                     <i class="fab fa-reddit-alien hcard-icon" style="color:#ff5a00"></i>
                     <div>
                         <p class="hcard-platform">Reddit</p>
-                        <p class="hcard-handle">u/johndoe</p>
+                        <p class="hcard-handle">u/karthik_p9</p>
                     </div>
                     <i class="fab fa-reddit-alien hcard-bg-icon"></i>
                 </a>
 
-                <!-- Product Hunt -->
-                <a href="#" class="hcard hc-ph" style="animation-delay:.35s">
-                    <i class="fab fa-product-hunt hcard-icon" style="color:#da491c"></i>
+                <!-- Discord -->
+                <div onclick="navigator.clipboard.writeText('karthix9'); showToast('Discord tag karthix9 copied!');"
+                    class="hcard hc-dc cursor-pointer" style="animation-delay:.20s">
+                    <i class="fab fa-discord hcard-icon" style="color:#7983f5"></i>
                     <div>
-                        <p class="hcard-platform">Product Hunt</p>
-                        <p class="hcard-handle">@johndoe</p>
+                        <p class="hcard-platform">Discord</p>
+                        <p class="hcard-handle">@karthix9</p>
                     </div>
-                    <i class="fab fa-product-hunt hcard-bg-icon"></i>
-                </a>
+                    <i class="fab fa-discord hcard-bg-icon"></i>
+                </div>
 
-                <!-- Copy handle -->
-                <button class="hcard hc-copy"
-                    style="animation-delay:.40s;border:none;text-align:left;font-family:inherit"
-                    onclick="copyUsername()">
-                    <i class="fas fa-copy hcard-icon" id="copy-icon" style="color:#8C89C7"></i>
-                    <div>
-                        <p class="hcard-platform">Quick Copy</p>
-                        <p class="hcard-handle" id="copy-text">Copy @handle</p>
-                    </div>
-                </button>
 
             </div>
 
@@ -1144,161 +363,17 @@
                 </div>
 
                 <!-- Right: button -->
-                <a href="https://www.buymeacoffee.com/johndoe" target="_blank" rel="noopener" class="bmc-btn">
+                <button onclick="showToast('Buy me a coffee is currently not available!')"
+                    class="bmc-btn cursor-pointer border-0 font-inherit">
                     <span class="bmc-btn-icon">☕</span>
                     <span>Support my work</span>
-                </a>
+                </button>
 
             </div>
         </div>
     </section>
 
-    <script>
-        // Copy @handle chip
-        function copyUsername(btn) {
-            const handle = '@johndoe';
-            navigator.clipboard.writeText(handle).catch(() => {
-                const dummy = document.createElement('input');
-                document.body.appendChild(dummy);
-                dummy.value = handle;
-                dummy.select();
-                document.execCommand('copy');
-                document.body.removeChild(dummy);
-            });
-            const icon = document.getElementById('copy-icon');
-            const text = document.getElementById('copy-text');
-            icon.className = 'fas fa-check text-sm text-green-600';
-            text.textContent = 'Copied!';
-            setTimeout(() => {
-                icon.className = 'fas fa-copy text-sm text-[#5E5B86]';
-                text.textContent = 'Copy @handle';
-            }, 2000);
-        }
-
-        function shareProfile() {
-            const shareData = {
-                title: 'John Doe - Software Engineer',
-                text: 'Check out this deep neomorphic portfolio!',
-                url: window.location.href
-            };
-
-            const iconElement = document.getElementById('share-icon');
-
-            if (navigator.share) {
-                // Use native mobile share sheet if available
-                navigator.share(shareData)
-                    .catch((err) => console.log('Error sharing:', err));
-            } else {
-                // Fallback: Copy link to clipboard
-                const dummy = document.createElement('input');
-                document.body.appendChild(dummy);
-                dummy.value = window.location.href;
-                dummy.select();
-                document.execCommand('copy');
-                document.body.removeChild(dummy);
-
-                // Visual feedback for copied link
-                const originalClass = iconElement.className;
-                iconElement.className = 'fas fa-check text-green-600';
-                setTimeout(() => {
-                    iconElement.className = originalClass;
-                }, 2000);
-            }
-        }
-
-        // Rocket Swipe/Drag to Launch Logic
-        const rocket = document.getElementById('rocket');
-        let startY = 0;
-
-        // Touch events for mobile swiping
-        rocket.addEventListener('touchstart', (e) => {
-            startY = e.touches[0].clientY;
-        }, { passive: true });
-
-        rocket.addEventListener('touchend', (e) => {
-            let endY = e.changedTouches[0].clientY;
-            if (startY - endY > 40) { // Detect upward swipe threshold
-                launchRocket();
-            }
-        });
-
-        // Mouse events for desktop dragging
-        rocket.addEventListener('mousedown', (e) => {
-            startY = e.clientY;
-        });
-
-        rocket.addEventListener('mouseup', (e) => {
-            let endY = e.clientY;
-            if (startY - endY > 40) { // Detect upward drag threshold
-                launchRocket();
-            }
-        });
-
-        // Synthesize a realistic rocket sound using Web Audio API (No external files needed)
-        function playLaunchSound() {
-            try {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                const ctx = new AudioContext();
-
-                // Create a white noise buffer for the "rocket roar"
-                const bufferSize = ctx.sampleRate * 1.5; // 1.5 seconds duration
-                const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-                const data = buffer.getChannelData(0);
-                for (let i = 0; i < bufferSize; i++) {
-                    data[i] = Math.random() * 2 - 1; // Generate white noise
-                }
-
-                const noise = ctx.createBufferSource();
-                noise.buffer = buffer;
-
-                // Lowpass filter to muffle the noise into a deep roar/whoosh
-                const filter = ctx.createBiquadFilter();
-                filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(50, ctx.currentTime);
-                filter.frequency.exponentialRampToValueAtTime(1500, ctx.currentTime + 0.3); // Pitch up on launch
-                filter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 1.2);  // Fade away in distance
-
-                // Volume envelope (fade in quickly, then fade out smoothly)
-                const gainNode = ctx.createGain();
-                gainNode.gain.setValueAtTime(0, ctx.currentTime);
-                gainNode.gain.linearRampToValueAtTime(0.6, ctx.currentTime + 0.1);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.2);
-
-                noise.connect(filter);
-                filter.connect(gainNode);
-                gainNode.connect(ctx.destination);
-
-                noise.start();
-            } catch (e) {
-                console.log("Web Audio API not supported or blocked by browser.", e);
-            }
-        }
-
-        function launchRocket() {
-            // Prevent triggering again if it's currently flying or arriving
-            if (rocket.classList.contains('fly-away-active') || rocket.classList.contains('rocket-arrive-active')) return;
-
-            // Play the synthesized sound effect
-            playLaunchSound();
-
-            // Pause float animation to prevent conflicts
-            rocket.classList.remove('float-animation-delayed');
-            rocket.classList.add('fly-away-active');
-
-            // Bring a new rocket in after the first one leaves the screen
-            setTimeout(() => {
-                rocket.classList.remove('fly-away-active');
-                rocket.classList.add('rocket-arrive-active');
-
-                // Once the new rocket arrives, resume the floating animation
-                setTimeout(() => {
-                    rocket.classList.remove('rocket-arrive-active');
-                    rocket.classList.add('float-animation-delayed');
-                }, 1000); // 1 second for arrival animation
-
-            }, 1200); // Wait for the 1.2s launch animation to finish
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>

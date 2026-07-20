@@ -1,0 +1,190 @@
+// Floating Toast Notification
+function showToast(msg) {
+    let toast = document.getElementById('toast-notification');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast-notification';
+        toast.className = 'fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl bg-[#323054] text-white font-bold text-xs md:text-sm border border-white/20 shadow-[0_10px_25px_rgba(0,0,0,0.5)] transition-all duration-300 transform translate-y-10 opacity-0 flex items-center gap-2 pointer-events-none';
+        document.body.appendChild(toast);
+    }
+    toast.innerHTML = `<i class="fas fa-circle-check text-emerald-400 text-base"></i> <span>${msg}</span>`;
+    toast.classList.remove('translate-y-10', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-10', 'opacity-0');
+    }, 2500);
+}
+
+// Copy handle / email chip
+function copyUsername(btn) {
+    const handle = 'karthikparambil9@gmail.com';
+    navigator.clipboard.writeText(handle).then(() => {
+        showToast('Email copied to clipboard!');
+    }).catch(() => {
+        const dummy = document.createElement('input');
+        document.body.appendChild(dummy);
+        dummy.value = handle;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+        showToast('Email copied to clipboard!');
+    });
+
+    const icon = document.getElementById('copy-icon');
+    const text = document.getElementById('copy-text');
+    if (icon) icon.className = 'fas fa-check text-sm text-green-600';
+    if (text) text.textContent = 'Copied!';
+    setTimeout(() => {
+        if (icon) icon.className = 'fas fa-copy text-sm text-[#5E5B86]';
+        if (text) text.textContent = 'Copy handle';
+    }, 2000);
+}
+
+function shareProfile() {
+    const shareData = {
+        title: 'Karthik P - Cybersecurity Researcher & Jr. Penetration Tester',
+        text: 'Check out the cybersecurity research and penetration testing portfolio of Karthik P!',
+        url: window.location.href
+    };
+
+    const iconElement = document.getElementById('share-icon');
+
+    if (navigator.share) {
+        // Native Share Sheet (Mobile / Modern Browsers)
+        navigator.share(shareData).catch((err) => {
+            if (err.name !== 'AbortError') {
+                copyLinkFallback(iconElement);
+            }
+        });
+    } else {
+        // Fallback: Copy link to clipboard
+        copyLinkFallback(iconElement);
+    }
+}
+
+function copyLinkFallback(iconElement) {
+    const shareUrl = window.location.href;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareUrl).then(showSuccessFeedback).catch(() => legacyCopy(shareUrl));
+    } else {
+        legacyCopy(shareUrl);
+    }
+
+    function showSuccessFeedback() {
+        showToast('Link copied to clipboard!');
+        if (!iconElement) return;
+        const originalClass = iconElement.className;
+        iconElement.className = 'fas fa-check text-green-600';
+        setTimeout(() => {
+            iconElement.className = originalClass;
+        }, 2000);
+    }
+
+    function legacyCopy(text) {
+        const dummy = document.createElement('input');
+        document.body.appendChild(dummy);
+        dummy.value = text;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+        showSuccessFeedback();
+    }
+}
+
+// Rocket Swipe/Drag to Launch Logic
+const rocket = document.getElementById('rocket');
+let startY = 0;
+
+if (rocket) {
+    // Touch events for mobile swiping
+    rocket.addEventListener('touchstart', (e) => {
+        startY = e.touches[0].clientY;
+    }, { passive: true });
+
+    rocket.addEventListener('touchend', (e) => {
+        let endY = e.changedTouches[0].clientY;
+        if (startY - endY > 40) { // Detect upward swipe threshold
+            launchRocket();
+        }
+    });
+
+    // Mouse events for desktop dragging
+    rocket.addEventListener('mousedown', (e) => {
+        startY = e.clientY;
+    });
+
+    rocket.addEventListener('mouseup', (e) => {
+        let endY = e.clientY;
+        if (startY - endY > 40) { // Detect upward drag threshold
+            launchRocket();
+        }
+    });
+}
+
+// Synthesize a realistic rocket sound using Web Audio API (No external files needed)
+function playLaunchSound() {
+    try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioContext();
+
+        // Create a white noise buffer for the "rocket roar"
+        const bufferSize = ctx.sampleRate * 1.5; // 1.5 seconds duration
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+            data[i] = Math.random() * 2 - 1; // Generate white noise
+        }
+
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+
+        // Lowpass filter to muffle the noise into a deep roar/whoosh
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(50, ctx.currentTime);
+        filter.frequency.exponentialRampToValueAtTime(1500, ctx.currentTime + 0.3); // Pitch up on launch
+        filter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 1.2);  // Fade away in distance
+
+        // Volume envelope (fade in quickly, then fade out smoothly)
+        const gainNode = ctx.createGain();
+        gainNode.gain.setValueAtTime(0, ctx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.6, ctx.currentTime + 0.1);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.2);
+
+        noise.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(ctx.destination);
+
+        noise.start();
+    } catch (e) {
+        console.log("Web Audio API not supported or blocked by browser.", e);
+    }
+}
+
+function launchRocket() {
+    if (!rocket) return;
+    // Prevent triggering again if it's currently flying or arriving
+    if (rocket.classList.contains('fly-away-active') || rocket.classList.contains('rocket-arrive-active')) return;
+
+    // Play the synthesized sound effect
+    playLaunchSound();
+
+    // Pause float animation to prevent conflicts
+    rocket.classList.remove('float-animation-delayed');
+    rocket.classList.add('fly-away-active');
+
+    // Bring a new rocket in after the first one leaves the screen
+    setTimeout(() => {
+        rocket.classList.remove('fly-away-active');
+        rocket.classList.add('rocket-arrive-active');
+
+        // Once the new rocket arrives, resume the floating animation
+        setTimeout(() => {
+            rocket.classList.remove('rocket-arrive-active');
+            rocket.classList.add('float-animation-delayed');
+        }, 1000); // 1 second for arrival animation
+
+    }, 1200); // Wait for the 1.2s launch animation to finish
+}
