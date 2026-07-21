@@ -99,16 +99,13 @@ let lastTouchToggleTime = 0;
 
 function toggleRocketSound() {
     isMp3Sound = !isMp3Sound;
-    if (isMp3Sound) {
-        showToast('Rocket sound changed');
-    } else {
-        showToast('Rocket sound changed');
-    }
+    showToast(isMp3Sound ? 'Rocket sound changed' : 'Rocket sound changed');
 }
 
 // Rocket Swipe/Drag to Launch Logic
 const rocket = document.getElementById('rocket');
 let startY = 0;
+let startX = 0;
 let lastTapTime = 0;
 
 if (rocket) {
@@ -120,26 +117,31 @@ if (rocket) {
         toggleRocketSound();
     });
 
-    // Touch events for mobile swiping & double tap
+    // Touch events for mobile swiping & double tap (Android Brave, Chrome, iOS Safari)
     rocket.addEventListener('touchstart', (e) => {
         if (e.touches && e.touches.length > 0) {
             startY = e.touches[0].clientY;
+            startX = e.touches[0].clientX;
         }
         getAudioContext();
     }, { passive: true });
 
     rocket.addEventListener('touchend', (e) => {
         if (!e.changedTouches || e.changedTouches.length === 0) return;
-        let endY = e.changedTouches[0].clientY;
+        const endY = e.changedTouches[0].clientY;
+        const endX = e.changedTouches[0].clientX;
         const deltaY = startY - endY;
+        const deltaX = Math.abs(startX - endX);
         const now = Date.now();
         const tapLength = now - lastTapTime;
 
-        if (deltaY > 35) { // Detect upward swipe threshold
+        // Upward swipe threshold for launch (> 30px up, primarily vertical)
+        if (deltaY > 30 && deltaY > deltaX) {
             launchRocket();
             lastTapTime = 0;
-        } else if (Math.abs(deltaY) <= 18) { // Tap threshold (allows slight finger drift)
-            if (tapLength > 0 && tapLength < 450) {
+        } else {
+            // Any non-launch touch release is counted as a tap gesture
+            if (tapLength > 0 && tapLength < 500) {
                 // Double tap detected on mobile
                 lastTouchToggleTime = now;
                 toggleRocketSound();
