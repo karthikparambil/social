@@ -358,9 +358,21 @@
                     </div>
                 </div>
 
-                <!-- Right: button -->
-                <button onclick="showToast('Buy me a coffee is currently not available!')"
-                    class="bmc-btn cursor-pointer border-0 font-inherit">
+                <!-- Choice Buttons -->
+                <div id="bmc-choice-container" class="flex flex-wrap items-center justify-center sm:justify-start w-full sm:w-auto gap-2 shrink-0">
+                    <button onclick="handleBmcChoice(true)" id="bmc-btn-like"
+                        class="bmc-choice-btn bmc-choice-like inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-extrabold text-xs tracking-wider uppercase text-white bg-gradient-to-r from-[#6C6999] to-[#4A4870] border border-white/20 shadow-[5px_5px_14px_rgba(22,20,42,0.6)] hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer">
+                        <span>☕ Like</span>
+                    </button>
+                    <button onclick="handleBmcChoice(false)" id="bmc-btn-dislike"
+                        class="bmc-choice-btn bmc-choice-dislike inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-extrabold text-xs tracking-wider uppercase text-white bg-gradient-to-r from-[#6C6999] to-[#4A4870] border border-white/20 shadow-[5px_5px_14px_rgba(22,20,42,0.6)] hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer">
+                        <span>👎 Dislike</span>
+                    </button>
+                </div>
+
+                <!-- Hidden/Popped Support Button (Direct child of bmc-inner, restoring exact original button styling/alignment) -->
+                <button id="bmc-support-btn" onclick="showToast('Buy me a coffee is currently not available!')"
+                    class="bmc-btn cursor-pointer border-0 font-inherit hidden transition-all duration-300 transform scale-95 opacity-0">
                     <span class="bmc-btn-icon">☕</span>
                     <span>Support my work</span>
                 </button>
