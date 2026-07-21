@@ -93,26 +93,54 @@ function copyLinkFallback(iconElement) {
     }
 }
 
+// Sound mode state: false = JS Synthesized Audio, true = MP3 Audio
+let isMp3Sound = false;
+
+function toggleRocketSound() {
+    isMp3Sound = !isMp3Sound;
+    if (isMp3Sound) {
+        showToast('Rocket sound changed');
+    } else {
+        showToast('Rocket sound changed');
+    }
+}
+
 // Rocket Swipe/Drag to Launch Logic
 const rocket = document.getElementById('rocket');
 let startY = 0;
+let lastTapTime = 0;
 
 if (rocket) {
-    // Touch events for mobile swiping
+    // Desktop double-click to toggle sound
+    rocket.addEventListener('dblclick', (e) => {
+        e.preventDefault();
+        toggleRocketSound();
+    });
+
+    // Touch events for mobile swiping & double tap
     rocket.addEventListener('touchstart', (e) => {
         startY = e.touches[0].clientY;
+        getAudioContext();
     }, { passive: true });
 
     rocket.addEventListener('touchend', (e) => {
         let endY = e.changedTouches[0].clientY;
+        const currentTime = new Date().getTime();
+        const tapLength = currentTime - lastTapTime;
+
         if (startY - endY > 40) { // Detect upward swipe threshold
             launchRocket();
+        } else if (tapLength < 300 && tapLength > 0) {
+            // Double tap detected
+            toggleRocketSound();
         }
+        lastTapTime = currentTime;
     });
 
     // Mouse events for desktop dragging
     rocket.addEventListener('mousedown', (e) => {
         startY = e.clientY;
+        getAudioContext();
     });
 
     rocket.addEventListener('mouseup', (e) => {
@@ -123,8 +151,78 @@ if (rocket) {
     });
 }
 
-// Synthesize a realistic rocket sound using Web Audio API (No external files needed)
+// Preload MP3 audio for instant zero-delay playback
+const mp3AudioElement = new Audio('assets/Weeee Sound .mp3');
+mp3AudioElement.preload = 'auto';
+
+let mp3AudioBuffer = null;
+let globalAudioCtx = null;
+
+function getAudioContext() {
+    if (!globalAudioCtx) {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtx) {
+            globalAudioCtx = new AudioCtx();
+        }
+    }
+    if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
+        globalAudioCtx.resume();
+    }
+    return globalAudioCtx;
+}
+
+// Pre-fetch & decode MP3 into RAM for zero-latency Web Audio API playback
+fetch('assets/Weeee Sound .mp3')
+    .then(res => res.arrayBuffer())
+    .then(data => {
+        const ctx = getAudioContext();
+        if (ctx) {
+            return ctx.decodeAudioData(data);
+        }
+    })
+    .then(buffer => {
+        if (buffer) mp3AudioBuffer = buffer;
+    })
+    .catch(err => {
+        console.log('Preloading MP3 buffer failed:', err);
+    });
+
 function playLaunchSound() {
+    if (isMp3Sound) {
+        playMp3Sound();
+    } else {
+        playSynthesizedSound();
+    }
+}
+
+function playMp3Sound() {
+    const ctx = getAudioContext();
+    if (ctx && mp3AudioBuffer) {
+        try {
+            const source = ctx.createBufferSource();
+            source.buffer = mp3AudioBuffer;
+            source.connect(ctx.destination);
+            source.start(0);
+            return;
+        } catch (e) {
+            console.log('Web Audio MP3 play failed, falling back to Audio element:', e);
+        }
+    }
+
+    // Fallback using preloaded HTML5 Audio element
+    try {
+        mp3AudioElement.currentTime = 0;
+        mp3AudioElement.play().catch((err) => {
+            console.log('MP3 element play failed:', err);
+            playSynthesizedSound();
+        });
+    } catch (e) {
+        playSynthesizedSound();
+    }
+}
+
+// Synthesize a realistic rocket sound using Web Audio API (No external files needed)
+function playSynthesizedSound() {
     try {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         const ctx = new AudioContext();
