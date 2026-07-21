@@ -99,7 +99,7 @@ let lastTouchToggleTime = 0;
 
 function toggleRocketSound() {
     isMp3Sound = !isMp3Sound;
-    showToast(isMp3Sound ? 'Rocket sound changed' : 'Rocket sound changed');
+    showToast(isMp3Sound ? 'Sound: MP3' : 'Sound: JS');
 }
 
 // Rocket Swipe/Drag to Launch Logic
