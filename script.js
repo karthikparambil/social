@@ -95,6 +95,7 @@ function copyLinkFallback(iconElement) {
 
 // Sound mode state: false = JS Synthesized Audio, true = MP3 Audio
 let isMp3Sound = false;
+let lastTouchToggleTime = 0;
 
 function toggleRocketSound() {
     isMp3Sound = !isMp3Sound;
@@ -114,27 +115,39 @@ if (rocket) {
     // Desktop double-click to toggle sound
     rocket.addEventListener('dblclick', (e) => {
         e.preventDefault();
+        // Prevent synthetic mobile dblclick event from double-toggling
+        if (Date.now() - lastTouchToggleTime < 600) return;
         toggleRocketSound();
     });
 
     // Touch events for mobile swiping & double tap
     rocket.addEventListener('touchstart', (e) => {
-        startY = e.touches[0].clientY;
+        if (e.touches && e.touches.length > 0) {
+            startY = e.touches[0].clientY;
+        }
         getAudioContext();
     }, { passive: true });
 
     rocket.addEventListener('touchend', (e) => {
+        if (!e.changedTouches || e.changedTouches.length === 0) return;
         let endY = e.changedTouches[0].clientY;
-        const currentTime = new Date().getTime();
-        const tapLength = currentTime - lastTapTime;
+        const deltaY = startY - endY;
+        const now = Date.now();
+        const tapLength = now - lastTapTime;
 
-        if (startY - endY > 40) { // Detect upward swipe threshold
+        if (deltaY > 35) { // Detect upward swipe threshold
             launchRocket();
-        } else if (tapLength < 300 && tapLength > 0) {
-            // Double tap detected
-            toggleRocketSound();
+            lastTapTime = 0;
+        } else if (Math.abs(deltaY) <= 18) { // Tap threshold (allows slight finger drift)
+            if (tapLength > 0 && tapLength < 450) {
+                // Double tap detected on mobile
+                lastTouchToggleTime = now;
+                toggleRocketSound();
+                lastTapTime = 0;
+            } else {
+                lastTapTime = now;
+            }
         }
-        lastTapTime = currentTime;
     });
 
     // Mouse events for desktop dragging
