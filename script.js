@@ -171,10 +171,6 @@ const mp3AudioElement = new Audio('assets/Weeee Sound .mp3');
 mp3AudioElement.preload = 'auto';
 let mp3AudioBuffer = null;
 
-// Preload Screaming MP3 audio for dislike interaction
-const screamAudioElement = new Audio('assets/screemming.mp3');
-screamAudioElement.preload = 'auto';
-let screamAudioBuffer = null;
 
 let globalAudioCtx = null;
 
@@ -207,21 +203,6 @@ fetch('assets/Weeee Sound .mp3')
         console.log('Preloading MP3 buffer failed:', err);
     });
 
-// Pre-fetch & decode Screaming MP3 into RAM
-fetch('assets/screemming.mp3')
-    .then(res => res.arrayBuffer())
-    .then(data => {
-        const ctx = getAudioContext();
-        if (ctx) {
-            return ctx.decodeAudioData(data);
-        }
-    })
-    .then(buffer => {
-        if (buffer) screamAudioBuffer = buffer;
-    })
-    .catch(err => {
-        console.log('Preloading scream MP3 buffer failed:', err);
-    });
 
 // Global Mobile Audio Unlocker for Android Brave / Chrome / iOS Safari
 function unlockMobileAudio() {
@@ -336,146 +317,3 @@ function launchRocket() {
     }, 1200); // Wait for the 1.2s launch animation to finish
 }
 
-let dislikeClickCount = 0;
-
-// Buy Me a Coffee Choice Handler
-function handleBmcChoice(likesCoffee) {
-    const choiceContainer = document.getElementById('bmc-choice-container');
-    const supportBtn = document.getElementById('bmc-support-btn');
-
-    if (likesCoffee) {
-        if (choiceContainer) {
-            choiceContainer.classList.add('hidden');
-        }
-        if (supportBtn) {
-            supportBtn.classList.remove('hidden');
-            requestAnimationFrame(() => {
-                supportBtn.classList.remove('scale-95', 'opacity-0');
-                supportBtn.classList.add('scale-100', 'opacity-100');
-            });
-        }
-    } else {
-        dislikeClickCount++;
-
-        // Warm up audio context on 1st click
-        const ctx = getAudioContext();
-        if (ctx && ctx.state === 'suspended') {
-            ctx.resume();
-        }
-
-        // On first click of dislike, show toast notification
-        if (dislikeClickCount === 1) {
-            showToast('No worries, thanks for visiting! 😊');
-            return;
-        }
-
-        // On second click of dislike, trigger screen shake & screaming sound
-        if ('vibrate' in navigator) {
-            try {
-                navigator.vibrate([150, 50, 150, 50, 150, 50, 150, 50, 150, 50, 150]);
-            } catch (e) {
-                console.log(e);
-            }
-        }
-
-        // Play screaming sound
-        playScreamSound();
-
-        // High-intensity 60fps JavaScript screen shake loop (4 seconds)
-        const startTime = Date.now();
-        const duration = 4000; // 4 seconds
-        const body = document.body;
-        const main = document.querySelector('main');
-        const originalBodyTransform = body.style.transform;
-        const originalMainTransform = main ? main.style.transform : '';
-
-        function shakeLoop() {
-            const elapsed = Date.now() - startTime;
-            if (elapsed < duration) {
-                // Intense random offsets
-                const intensity = 16; // 16px displacement
-                const rx = (Math.random() - 0.5) * intensity * 2;
-                const ry = (Math.random() - 0.5) * intensity * 2;
-                const rot = (Math.random() - 0.5) * 4; // 4 degree max tilt
-
-                const transformStr = `translate3d(${rx.toFixed(1)}px, ${ry.toFixed(1)}px, 0px) rotate(${rot.toFixed(1)}deg)`;
-                body.style.transform = transformStr;
-                if (main) main.style.transform = transformStr;
-
-                requestAnimationFrame(shakeLoop);
-            } else {
-                body.style.transform = originalBodyTransform;
-                if (main) main.style.transform = originalMainTransform;
-            }
-        }
-
-        shakeLoop();
-
-        showToast('No worries, thanks for visiting! 😊');
-    }
-}
-
-// Screaming sound player for dislike button (Web Audio RAM Buffer -> Fresh Audio -> Synthesizer)
-function playScreamSound() {
-    const ctx = getAudioContext();
-    if (ctx && ctx.state === 'suspended') {
-        ctx.resume();
-    }
-
-    // 1. Web Audio API RAM Buffer (Instant zero-delay playback from decoded RAM)
-    if (ctx && screamAudioBuffer) {
-        try {
-            const source = ctx.createBufferSource();
-            source.buffer = screamAudioBuffer;
-            source.connect(ctx.destination);
-            source.start(0);
-            return;
-        } catch (e) {
-            console.log('Web Audio RAM buffer playback error:', e);
-        }
-    }
-
-    // 2. Play fresh HTML5 Audio instance
-    try {
-        const freshAudio = new Audio('assets/screemming.mp3');
-        const playPromise = freshAudio.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(err => {
-                console.log('HTML5 Audio playback error:', err);
-                playSynthesizedScream();
-            });
-            return;
-        }
-    } catch (e) {
-        console.log('HTML5 Audio exception:', e);
-    }
-
-    // 3. Fallback to Web Audio Synthesized Scream
-    playSynthesizedScream();
-}
-
-// Web Audio API Synthesized Scream Fallback (No audio files needed)
-function playSynthesizedScream() {
-    try {
-        const ctx = getAudioContext();
-        if (!ctx) return;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(800, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(1400, ctx.currentTime + 0.3);
-        osc.frequency.exponentialRampToValueAtTime(350, ctx.currentTime + 1.2);
-
-        gain.gain.setValueAtTime(0.7, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.2);
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc.start(ctx.currentTime);
-        osc.stop(ctx.currentTime + 1.2);
-    } catch (e) {
-        console.log('Synthesized scream error:', e);
-    }
-}

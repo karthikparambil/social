@@ -6,25 +6,6 @@ body {
     min-height: 100vh;
 }
 
-/* Screen Shake Animation */
-.shake-screen-active {
-    animation: screen-shake 0.08s linear infinite !important;
-    will-change: transform, margin;
-}
-
-@keyframes screen-shake {
-    0%, 100% { transform: translate(0px, 0px) rotate(0deg); margin-left: 0px; margin-top: 0px; }
-    10% { transform: translate(-18px, 12px) rotate(-1.8deg); margin-left: -14px; margin-top: 10px; }
-    20% { transform: translate(18px, -12px) rotate(1.8deg); margin-left: 14px; margin-top: -10px; }
-    30% { transform: translate(-16px, 10px) rotate(-1.2deg); margin-left: -12px; margin-top: 8px; }
-    40% { transform: translate(16px, -10px) rotate(1.2deg); margin-left: 12px; margin-top: -8px; }
-    50% { transform: translate(-14px, 14px) rotate(-2deg); margin-left: -10px; margin-top: 12px; }
-    60% { transform: translate(14px, -14px) rotate(2deg); margin-left: 10px; margin-top: -12px; }
-    70% { transform: translate(-16px, -10px) rotate(-1.2deg); margin-left: -12px; margin-top: -8px; }
-    80% { transform: translate(16px, 10px) rotate(1.2deg); margin-left: 12px; margin-top: 8px; }
-    90% { transform: translate(-8px, -4px) rotate(-0.5deg); margin-left: -6px; margin-top: -4px; }
-}
-
 /* Highly realistic 3D Card */
 .glass-card-3d {
     background: linear-gradient(135deg, #7471A4 0%, #5E5B86 100%);
@@ -468,70 +449,12 @@ body {
     font-size: 1.1rem;
 }
 
-.bmc-choice-btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 0.5rem !important;
-    font-weight: 800 !important;
-    font-size: 0.85rem !important;
-    padding: 0.65rem 1.35rem !important;
-    border-radius: 9999px !important;
-    cursor: pointer !important;
-    letter-spacing: 0.03em !important;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    outline: none !important;
-    user-select: none !important;
-}
-
-/* 3D Choice Buttons (Like & Dislike - Dark Slate-Indigo Neomorphic Theme) */
-.bmc-choice-like,
-.bmc-choice-dislike {
-    background: linear-gradient(135deg, #6C6999 0%, #4A4870 100%) !important;
-    color: #FFFFFF !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    box-shadow:
-        5px 5px 14px rgba(22, 20, 42, 0.6),
-        -3px -3px 8px rgba(130, 125, 185, 0.25),
-        inset 1px 1px 2px rgba(255, 255, 255, 0.2) !important;
-}
-
-.bmc-choice-like:hover,
-.bmc-choice-dislike:hover {
-    transform: translateY(-2px) !important;
-    background: linear-gradient(135deg, #7875A8 0%, #54527C 100%) !important;
-    box-shadow:
-        8px 8px 20px rgba(22, 20, 42, 0.7),
-        -4px -4px 12px rgba(130, 125, 185, 0.35),
-        inset 1px 1px 2px rgba(255, 255, 255, 0.3) !important;
-}
-
-.bmc-choice-like:active,
-.bmc-choice-dislike:active {
-    transform: translateY(1px) !important;
-    box-shadow:
-        inset 4px 4px 8px rgba(22, 20, 42, 0.8),
-        inset -3px -3px 6px rgba(130, 125, 185, 0.2) !important;
-}
-
 @media (max-width: 640px) {
     .bmc-inner {
         flex-direction: column;
-        align-items: center;
-        text-align: center;
+        align-items: flex-start;
         padding: 1.25rem 1.5rem;
         gap: 1.25rem;
-    }
-
-    .bmc-left {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    #bmc-choice-container {
-        width: 100%;
-        justify-content: center;
     }
 
     .bmc-btn {
