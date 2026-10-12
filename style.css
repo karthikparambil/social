@@ -6,11 +6,9 @@ body {
     min-height: 100vh;
 }
 
-/* Highly realistic 3D Card */
 .glass-card-3d {
     background: linear-gradient(135deg, #7471A4 0%, #5E5B86 100%);
     border-radius: 40px;
-    /* Complex shadow: ambient drop shadow + rim light + inner dark shadow */
     box-shadow:
         25px 25px 50px rgba(25, 23, 45, 0.6),
         -15px -15px 35px rgba(135, 130, 185, 0.2),
@@ -20,7 +18,6 @@ body {
     position: relative;
 }
 
-/* Recessed Inner Panel (like the dark info box in ref) */
 .recessed-dark {
     background: linear-gradient(135deg, #2E2C4D 0%, #38355B 100%);
     border-radius: 30px;
@@ -36,7 +33,6 @@ body {
     opacity: 0.95;
 }
 
-/* 3D Navigation Icons Bar */
 .nav-bar-recessed {
     background: #5E5B86;
     border-radius: 24px;
@@ -73,7 +69,6 @@ body {
         inset 4px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Pill Buttons */
 .btn-pill-3d {
     background: linear-gradient(135deg, #E6E5FF 0%, #C8C7F0 100%);
     color: #323054;
@@ -100,7 +95,69 @@ body {
         inset 3px 3px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* Speech Bubbles Setup */
+/* ── Hero Section Action Buttons & Badges ── */
+.hero-role-badge {
+    color: #FFFFFF !important;
+    display: inline-block;
+    cursor: default;
+    border: none !important;
+    border-bottom: none !important;
+    text-decoration: none !important;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    opacity: 1 !important;
+}
+
+.hero-btn-action {
+    background: linear-gradient(135deg, #E6E5FF 0%, #C8C7F0 100%);
+    color: #323054;
+    border-radius: 14px;
+    font-weight: 700;
+    box-shadow:
+        4px 4px 10px rgba(18, 16, 32, 0.45),
+        -2px -2px 6px rgba(255, 255, 255, 0.35),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    text-decoration: none;
+}
+
+.hero-btn-action:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        6px 6px 14px rgba(18, 16, 32, 0.55),
+        -3px -3px 8px rgba(255, 255, 255, 0.45),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.9);
+    color: #1e1c36;
+}
+
+.hero-btn-action:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow:
+        2px 2px 5px rgba(18, 16, 32, 0.5),
+        inset 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.hero-btn-contact {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.88rem;
+    gap: 0.55rem;
+    height: 44px;
+}
+
+.hero-btn-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1rem;
+    padding: 0;
+    flex-shrink: 0;
+}
+
 .bubble-light {
     background: linear-gradient(135deg, #F0EFFF 0%, #D7D6FB 100%);
     color: #323054;
@@ -114,7 +171,6 @@ body {
     z-index: 10;
 }
 
-/* Left bubble tail */
 .bubble-left::after {
     content: '';
     position: absolute;
@@ -129,12 +185,10 @@ body {
     z-index: -1;
 }
 
-/* Right bubble overlapping */
 .bubble-right {
     z-index: 20;
     box-shadow:
         -10px 15px 30px rgba(20, 18, 40, 0.6),
-        /* Heavy cast shadow onto left bubble */
         15px 15px 25px rgba(30, 28, 50, 0.3),
         inset 2px 2px 5px rgba(255, 255, 255, 0.9);
 }
@@ -152,7 +206,6 @@ body {
     z-index: -1;
 }
 
-/* Top Outline Text */
 .text-outline {
     color: transparent;
     -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
@@ -161,7 +214,6 @@ body {
     text-shadow: 4px 4px 10px rgba(30, 28, 50, 0.3);
 }
 
-/* Floating 3D CSS Elements */
 .float-animation {
     animation: float-3d 6s ease-in-out infinite;
 }
@@ -184,7 +236,6 @@ body {
     }
 }
 
-/* Rocket Launch Animation */
 .fly-away-active {
     animation: rocket-launch 1.2s cubic-bezier(0.5, 0, 0.2, 1) forwards !important;
 }
@@ -198,14 +249,12 @@ body {
         transform: translateY(20px) rotate(0deg);
     }
 
-    /* Pre-launch dip */
     100% {
         transform: translateY(-1500px) rotate(10deg);
         opacity: 0;
     }
 }
 
-/* Rocket Arrival Animation (The Next Rocket) */
 .rocket-arrive-active {
     animation: rocket-arrive 1s cubic-bezier(0.2, 1, 0.3, 1) forwards !important;
 }
@@ -222,7 +271,6 @@ body {
     }
 }
 
-/* CSS Planet (Mimicking the reference 3D items) */
 .css-planet {
     width: 100px;
     height: 100px;
@@ -246,7 +294,6 @@ body {
     box-shadow:
         0px 10px 15px rgba(0, 0, 0, 0.3),
         inset 0px 2px 5px rgba(0, 0, 0, 0.5);
-    /* Hide back half of ring */
     clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
 }
 
@@ -266,7 +313,6 @@ body {
     }
 
     .bubble-right {
-        /* Fix shadow direction for vertical stack (casting up onto first bubble) */
         box-shadow:
             0px -15px 25px rgba(20, 18, 40, 0.5),
             10px 10px 20px rgba(30, 28, 50, 0.3),
@@ -287,7 +333,6 @@ body {
     }
 }
 
-/* ── Buy Me a Coffee Section ── */
 .bmc-section {
     background: #44426A;
     border-radius: 32px;
@@ -465,7 +510,6 @@ body {
 
 
 .handles-section {
-    /* Flat base — same tone as main bg so neomorphic shadows read correctly */
     background: #44426A;
     border-radius: 36px;
     box-shadow:
@@ -492,7 +536,6 @@ body {
     text-transform: uppercase;
 }
 
-/* Neomorphic card base */
 .hcard {
     display: flex;
     flex-direction: column;
@@ -504,9 +547,7 @@ body {
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    /* Same flat colour as parent for true neomorphism */
     background: #44426A;
-    /* Raised state: dark shadow bottom-right, light shadow top-left */
     box-shadow:
         8px 8px 18px rgba(22, 20, 42, 0.7),
         -5px -5px 14px rgba(115, 110, 168, 0.25),
@@ -518,7 +559,6 @@ body {
 
 
 
-/* Hover: slightly more raised */
 .hcard:hover {
     box-shadow:
         12px 12px 26px rgba(22, 20, 42, 0.75),
@@ -527,7 +567,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* Active / pressed: invert to recessed */
+
 .hcard:active {
     box-shadow:
         inset 5px 5px 12px rgba(22, 20, 42, 0.7),
@@ -540,7 +580,6 @@ body {
     margin-bottom: 0.55rem;
     display: flex;
     align-items: center;
-    /* Neomorphic icon container */
     width: 44px;
     height: 44px;
     border-radius: 12px;

@@ -1,4 +1,3 @@
-// Floating Toast Notification
 function showToast(msg) {
     let toast = document.getElementById('toast-notification');
     if (!toast) {
@@ -17,7 +16,6 @@ function showToast(msg) {
     }, 2500);
 }
 
-// Copy handle / email chip
 function copyUsername(btn) {
     const handle = 'karthikparambil9@gmail.com';
     navigator.clipboard.writeText(handle).then(() => {
@@ -52,14 +50,12 @@ function shareProfile() {
     const iconElement = document.getElementById('share-icon');
 
     if (navigator.share) {
-        // Native Share Sheet (Mobile / Modern Browsers)
         navigator.share(shareData).catch((err) => {
             if (err.name !== 'AbortError') {
                 copyLinkFallback(iconElement);
             }
         });
     } else {
-        // Fallback: Copy link to clipboard
         copyLinkFallback(iconElement);
     }
 }
@@ -93,7 +89,6 @@ function copyLinkFallback(iconElement) {
     }
 }
 
-// Sound mode state: false = JS Synthesized Audio, true = MP3 Audio
 let isMp3Sound = false;
 let lastTouchToggleTime = 0;
 
@@ -102,22 +97,18 @@ function toggleRocketSound() {
     showToast(isMp3Sound ? 'Sound: MP3' : 'Sound: JS');
 }
 
-// Rocket Swipe/Drag to Launch Logic
 const rocket = document.getElementById('rocket');
 let startY = 0;
 let startX = 0;
 let lastTapTime = 0;
 
 if (rocket) {
-    // Desktop double-click to toggle sound
     rocket.addEventListener('dblclick', (e) => {
         e.preventDefault();
-        // Prevent synthetic mobile dblclick event from double-toggling
         if (Date.now() - lastTouchToggleTime < 600) return;
         toggleRocketSound();
     });
 
-    // Touch events for mobile swiping & double tap (Android Brave, Chrome, iOS Safari)
     rocket.addEventListener('touchstart', (e) => {
         if (e.touches && e.touches.length > 0) {
             startY = e.touches[0].clientY;
@@ -135,14 +126,11 @@ if (rocket) {
         const now = Date.now();
         const tapLength = now - lastTapTime;
 
-        // Upward swipe threshold for launch (> 30px up, primarily vertical)
         if (deltaY > 30 && deltaY > deltaX) {
             launchRocket();
             lastTapTime = 0;
         } else {
-            // Any non-launch touch release is counted as a tap gesture
             if (tapLength > 0 && tapLength < 500) {
-                // Double tap detected on mobile
                 lastTouchToggleTime = now;
                 toggleRocketSound();
                 lastTapTime = 0;
@@ -152,7 +140,6 @@ if (rocket) {
         }
     });
 
-    // Mouse events for desktop dragging
     rocket.addEventListener('mousedown', (e) => {
         startY = e.clientY;
         getAudioContext();
@@ -160,13 +147,12 @@ if (rocket) {
 
     rocket.addEventListener('mouseup', (e) => {
         let endY = e.clientY;
-        if (startY - endY > 40) { // Detect upward drag threshold
+        if (startY - endY > 40) {
             launchRocket();
         }
     });
 }
 
-// Preload MP3 audio for instant zero-delay playback
 const mp3AudioElement = new Audio('assets/Weeee Sound .mp3');
 mp3AudioElement.preload = 'auto';
 let mp3AudioBuffer = null;
@@ -187,7 +173,6 @@ function getAudioContext() {
     return globalAudioCtx;
 }
 
-// Pre-fetch & decode Weeee MP3 into RAM for zero-latency Web Audio API playback
 fetch('assets/Weeee Sound .mp3')
     .then(res => res.arrayBuffer())
     .then(data => {
@@ -203,8 +188,6 @@ fetch('assets/Weeee Sound .mp3')
         console.log('Preloading MP3 buffer failed:', err);
     });
 
-
-// Global Mobile Audio Unlocker for Android Brave / Chrome / iOS Safari
 function unlockMobileAudio() {
     const ctx = getAudioContext();
     if (ctx && ctx.state === 'suspended') {
@@ -239,7 +222,6 @@ function playMp3Sound() {
         }
     }
 
-    // Fallback using preloaded HTML5 Audio element
     try {
         mp3AudioElement.currentTime = 0;
         mp3AudioElement.play().catch((err) => {
@@ -251,31 +233,27 @@ function playMp3Sound() {
     }
 }
 
-// Synthesize a realistic rocket sound using Web Audio API (No external files needed)
 function playSynthesizedSound() {
     try {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         const ctx = new AudioContext();
 
-        // Create a white noise buffer for the "rocket roar"
-        const bufferSize = ctx.sampleRate * 1.5; // 1.5 seconds duration
+        const bufferSize = ctx.sampleRate * 1.5;
         const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const data = buffer.getChannelData(0);
         for (let i = 0; i < bufferSize; i++) {
-            data[i] = Math.random() * 2 - 1; // Generate white noise
+            data[i] = Math.random() * 2 - 1;
         }
 
         const noise = ctx.createBufferSource();
         noise.buffer = buffer;
 
-        // Lowpass filter to muffle the noise into a deep roar/whoosh
         const filter = ctx.createBiquadFilter();
         filter.type = 'lowpass';
         filter.frequency.setValueAtTime(50, ctx.currentTime);
-        filter.frequency.exponentialRampToValueAtTime(1500, ctx.currentTime + 0.3); // Pitch up on launch
-        filter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 1.2);  // Fade away in distance
+        filter.frequency.exponentialRampToValueAtTime(1500, ctx.currentTime + 0.3);
+        filter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 1.2);
 
-        // Volume envelope (fade in quickly, then fade out smoothly)
         const gainNode = ctx.createGain();
         gainNode.gain.setValueAtTime(0, ctx.currentTime);
         gainNode.gain.linearRampToValueAtTime(0.6, ctx.currentTime + 0.1);
@@ -293,27 +271,41 @@ function playSynthesizedSound() {
 
 function launchRocket() {
     if (!rocket) return;
-    // Prevent triggering again if it's currently flying or arriving
     if (rocket.classList.contains('fly-away-active') || rocket.classList.contains('rocket-arrive-active')) return;
 
-    // Play the synthesized sound effect
     playLaunchSound();
 
-    // Pause float animation to prevent conflicts
     rocket.classList.remove('float-animation-delayed');
     rocket.classList.add('fly-away-active');
 
-    // Bring a new rocket in after the first one leaves the screen
     setTimeout(() => {
         rocket.classList.remove('fly-away-active');
         rocket.classList.add('rocket-arrive-active');
 
-        // Once the new rocket arrives, resume the floating animation
         setTimeout(() => {
             rocket.classList.remove('rocket-arrive-active');
             rocket.classList.add('float-animation-delayed');
-        }, 1000); // 1 second for arrival animation
+        }, 1000);
 
-    }, 1200); // Wait for the 1.2s launch animation to finish
+    }, 1200);
 }
+
+// Toggle Hero Bio More/Less
+function toggleHeroBio() {
+    const shortEl = document.getElementById('bio-short');
+    const fullEl = document.getElementById('bio-full');
+    const toggleBtn = document.getElementById('bio-toggle');
+    if (!shortEl || !fullEl || !toggleBtn) return;
+
+    if (fullEl.classList.contains('hidden')) {
+        shortEl.classList.add('hidden');
+        fullEl.classList.remove('hidden');
+        toggleBtn.textContent = 'Less';
+    } else {
+        fullEl.classList.add('hidden');
+        shortEl.classList.remove('hidden');
+        toggleBtn.textContent = 'More';
+    }
+}
+
 

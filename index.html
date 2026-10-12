@@ -17,11 +17,11 @@
                         sans: ['Nunito', 'sans-serif'],
                     },
                     colors: {
-                        base: '#4A4870',        /* Deep background */
-                        cardStart: '#726F9E',   /* Card gradient start */
-                        cardEnd: '#5E5B86',     /* Card gradient end */
-                        lightBubble: '#D7D6FB', /* Light text boxes */
-                        darkPanel: '#323054',   /* Recessed dark areas */
+                        base: '#4A4870',        
+                        cardStart: '#726F9E',  
+                        cardEnd: '#5E5B86',     
+                        lightBubble: '#D7D6FB', 
+                        darkPanel: '#323054',   
                         accent: '#8C89C7',
                     }
                 }
@@ -29,89 +29,85 @@
         }
     </script>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
 </head>
 
 <body class="flex flex-col items-center py-6 md:py-12 px-4 md:px-8 font-sans">
 
     <main class="w-full max-w-5xl flex flex-col items-center gap-6 relative">
 
-        <!-- TOP CARD -->
-        <section class="glass-card-3d w-full p-6 sm:p-8 md:p-10 relative z-10 overflow-hidden md:overflow-visible">
-            <!-- Background Outline Text -->
-            <div class="absolute top-4 left-4 md:left-8 opacity-40 pointer-events-none z-20">
-                <h1 class="text-4xl sm:text-6xl md:text-8xl text-outline m-0 leading-none">PORTFOLIO</h1>
-                <p
-                    class="text-[10px] sm:text-xs md:text-sm tracking-[0.2em] md:tracking-[0.3em] text-white font-bold ml-1 md:ml-2 mt-1">
-                    CYBERSECURITY RESEARCHER & PENETRATION TESTER</p>
-            </div>
+        <!-- TOP CARD (HERO SECTION) -->
+        <section class="glass-card-3d w-full p-4 sm:p-6 md:p-8 pb-10 sm:pb-12 md:pb-14 relative z-10 overflow-hidden md:overflow-visible">
 
-            <!-- Profile Content Area -->
-            <div class="relative z-10 mt-12 md:mt-28 flex flex-col lg:flex-row gap-8 items-center lg:items-stretch">
+            <!-- Profile Content Area (Recessed Dark Panel) -->
+            <div class="recessed-dark p-5 sm:p-7 md:p-8 w-full relative z-10">
 
-                <!-- Recessed Dark Panel for Profile Info -->
-                <div
-                    class="recessed-dark p-4 pt-14 sm:p-6 sm:pt-16 md:pt-8 md:p-8 flex-1 w-full flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-8 relative mt-8 md:mt-0">
-
-                    <!-- Profile Picture with 3D Pop -->
-                    <div class="relative shrink-0 absolute -top-4 md:relative md:top-0 z-20">
-                        <div
-                            class="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-[2rem] overflow-hidden p-1.5 md:p-2 bg-gradient-to-br from-[#D7D6FB] to-[#8C89C7] shadow-[10px_10px_20px_rgba(0,0,0,0.5)]">
-                            <img src="assets/karthik_portrait.png" alt="Profile"
-                                class="w-full h-full object-cover rounded-3xl shadow-inner border border-white/20">
-                        </div>
+                <!-- 1. Header: Avatar + Name & Subtitle -->
+                <div class="flex items-center gap-4 sm:gap-5">
+                    <!-- Circular Avatar with 3D Bevel Rim -->
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-1 bg-gradient-to-br from-[#D7D6FB] to-[#8C89C7] shadow-[5px_5px_15px_rgba(0,0,0,0.5),-2px_-2px_6px_rgba(255,255,255,0.25)] shrink-0">
+                        <img src="assets/karthik_portrait.png" alt="Karthik parambil"
+                            class="w-full h-full object-cover rounded-full border border-white/20">
                     </div>
 
-                    <div class="text-center md:text-left flex-1 mt-1 md:mt-0 w-full">
-                        <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3">Karthik P</h2>
-                        <p class="font-medium mb-5 md:mb-6 leading-relaxed text-xs sm:text-sm md:text-base tracking-wide"
-                            style="color: #FFFFFF !important;">
-                            Cybersecurity Researcher & Jr. Penetration Tester. Specialized in network pentesting, Active
-                            Directory exploitation, OWASP Top 10 vulnerabilities, CTF lab development, and security tool
-                            automation.
-                        </p>
-
-                        <div class="flex flex-wrap justify-center md:justify-start gap-3 md:gap-4">
-                            <a href="https://karthikparambil.github.io/assets/resume.pdf" target="_blank"
-                                class="btn-pill-3d uppercase text-xs">
-                                Resume
-                            </a>
+                    <!-- Name and Subtitle -->
+                    <div class="min-w-0 flex-1">
+                        <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-tight">
+                            Karthik parambil
+                        </h1>
+                        <div class="mt-1">
+                            <span class="hero-role-badge text-xs sm:text-sm md:text-base font-bold text-white tracking-wide"
+                                style="color: #FFFFFF !important; opacity: 1 !important; border: none !important; border-bottom: none !important; text-decoration: none !important; display: inline-block;">
+                                CYBERSECURITY RESEARCHER & PENETRATION TESTER
+                            </span>
                         </div>
-                    </div>
-
-                    <!-- Decorative border outline inside the dark panel -->
-                    <div
-                        class="absolute top-4 right-4 bottom-4 left-4 border border-white/10 rounded-2xl pointer-events-none hidden md:block">
                     </div>
                 </div>
 
+                <!-- 2. Action Button: Contact -->
+                <div class="mt-5 sm:mt-6">
+                    <!-- Contact Button -->
+                    <a href="mailto:karthikparambil9@gmail.com"
+                        class="hero-btn-action hero-btn-contact"
+                        title="Contact Karthik">
+                        <svg viewBox="0 0 24 24" class="w-4 h-4 fill-none stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="16" x="2" y="4" rx="3"></rect>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                        </svg>
+                        <span>Contact</span>
+                    </a>
+                </div>
+
+                <!-- 3. Bio Description Paragraph with Interactive More Toggle -->
+                <div class="mt-5 sm:mt-6 text-[#F3F3F9] text-xs sm:text-sm md:text-base leading-relaxed">
+                    <p id="hero-bio">
+                        <span id="bio-short">I help businesses and organizations stay safe online by finding security weaknesses before malicious hackers can exploit them...</span>
+                        <span id="bio-full" class="hidden">I help businesses and organizations stay safe online by finding security weaknesses before malicious hackers can exploit them. As a cybersecurity researcher, I test websites and networks for vulnerabilities, study modern online threats, and build custom security tools to keep digital data secure and trustworthy.</span>
+                        <button id="bio-toggle" onclick="toggleHeroBio()" class="font-bold text-white hover:text-[#D7D6FB] underline decoration-dotted ml-1 cursor-pointer transition-colors">More</button>
+                    </p>
+                </div>
+
+
+                <!-- Decorative subtle inner border line -->
+                <div class="absolute top-3 right-3 bottom-3 left-3 border border-white/5 rounded-2xl pointer-events-none hidden md:block"></div>
             </div>
         </section>
 
-        <!-- Center Overlapping Nav Menu -->
         <div class="nav-bar-recessed -mt-6 md:-mt-12 mb-2 p-2 md:p-3 gap-2 sm:gap-4">
             <a href="https://karthikparambil.github.io" target="_blank" rel="noopener" class="nav-btn-3d"
                 title="Portfolio">
-                <!-- Updated SVG for Portfolio / CTF Lab -->
                 <svg viewBox="0 0 24 24" class="w-6 h-6 md:w-7 md:h-7">
-                    <!-- Doc 1 (Back) -->
                     <path d="M 5 8 V 4 C 5 2.9 5.9 2 7 2 H 14 C 15.1 2 16 2.9 16 4 V 9" fill="#D7D6FB" stroke="#4A4870"
                         stroke-width="2" stroke-linecap="round" />
-                    <!-- Doc 2 (Front) -->
                     <path d="M 8 9 V 5 C 8 3.9 8.9 3 10 3 H 17 C 18.1 3 19 3.9 19 5 V 10" fill="#D7D6FB"
                         stroke="#4A4870" stroke-width="2" stroke-linecap="round" />
-                    <!-- Folder -->
                     <path
                         d="M 3 20 V 10 C 3 8.9 3.9 8 5 8 H 10 C 10.5 8 11 8.2 11.5 8.6 L 13 10 H 20 C 21.1 10 22 10.9 22 12 V 20 C 22 21.1 21.1 22 20 22 H 5 C 3.9 22 3 21.1 3 20 Z"
                         fill="#D7D6FB" stroke="#4A4870" stroke-width="2" stroke-linejoin="round" />
-                    <!-- Profile Circle -->
                     <circle cx="8.5" cy="15.5" r="3" fill="#D7D6FB" stroke="#4A4870" stroke-width="2" />
-                    <!-- Profile Head -->
                     <circle cx="8.5" cy="14.2" r="1" fill="none" stroke="#4A4870" stroke-width="1.5" />
-                    <!-- Profile Body -->
                     <path d="M 6.5 17.5 C 6.5 16.5 7.2 15.8 8.5 15.8 C 9.8 15.8 10.5 16.5 10.5 17.5" fill="none"
                         stroke="#4A4870" stroke-width="1.5" stroke-linecap="round" />
-                    <!-- Lines -->
                     <line x1="13.5" y1="14" x2="18" y2="14" stroke="#4A4870" stroke-width="2" stroke-linecap="round" />
                     <line x1="13.5" y1="17" x2="18" y2="17" stroke="#4A4870" stroke-width="2" stroke-linecap="round" />
                 </svg>
@@ -124,10 +120,8 @@
                     id="share-icon"></i></button>
         </div>
 
-        <!-- BOTTOM CARD (The deep explanation area) -->
         <section class="glass-card-3d w-full p-4 sm:p-6 md:p-12 relative z-10 mt-2 md:mt-4 overflow-visible">
 
-            <!-- Top Right Tab -->
             <div class="absolute top-4 right-4 md:top-6 md:right-12 z-40">
                 <div
                     class="border border-white/30 rounded-full px-3 py-1 md:px-6 md:py-2 text-[9px] sm:text-[10px] md:text-xs font-bold tracking-wider sm:tracking-widest text-white shadow-[0_4px_10px_rgba(0,0,0,0.2)] bg-white/10 backdrop-blur-md">
@@ -135,7 +129,6 @@
                 </div>
             </div>
 
-            <!-- CSS Planet Floating Element (Left) -->
             <div
                 class="absolute -top-6 -left-6 md:-top-12 md:-left-12 float-animation z-50 pointer-events-none scale-75 md:scale-100 origin-center">
                 <div class="css-planet">
@@ -145,7 +138,6 @@
 
             <div class="mt-12 md:mt-20 relative flex flex-col md:flex-row gap-5 md:gap-0 items-stretch md:items-center">
 
-                <!-- Left Bubble (Contact & Bio) -->
                 <div
                     class="bubble-light bubble-left w-full md:w-3/5 md:-mr-10 md:mb-10 min-h-0 md:min-h-[250px] p-5 sm:p-6 md:p-8">
                     <h3 class="font-extrabold text-base md:text-lg mb-3 md:mb-4 text-[#4A4870] flex items-center gap-2">
@@ -181,7 +173,6 @@
                         </li>
                     </ul>
 
-                    <!-- Small inner pill -->
                     <div class="mt-5 md:mt-6">
                         <a href="mailto:karthikparambil9@gmail.com?subject=Inquiry%20from%20Portfolio"
                             class="btn-pill-3d text-[10px] md:text-xs px-3 py-1.5 md:px-4 md:py-2 bg-white"><i
@@ -189,7 +180,6 @@
                     </div>
                 </div>
 
-                <!-- Right Bubble (Current Role) -->
                 <div
                     class="bubble-light bubble-right w-full md:w-1/2 mt-2 md:mt-12 md:-ml-12 p-5 md:p-6 self-stretch md:self-center">
                     <h3 class="font-extrabold text-sm md:text-base mb-2 text-[#4A4870] flex items-center gap-2">
@@ -209,37 +199,28 @@
                 </div>
             </div>
 
-            <!-- Abstract Floating Decor Right (Mimicking Rocket) -->
             <div class="absolute -bottom-4 right-2 md:-bottom-16 md:right-12 z-50 scale-75 md:scale-90 origin-bottom">
-                <!-- Upgraded 3D CSS Rocket -->
                 <div id="rocket"
                     class="w-24 h-36 relative flex justify-center mt-6 float-animation-delayed cursor-pointer touch-none"
                     title="Swipe up to launch! Double-click/tap to toggle sound.">
-                    <!-- Left Fin -->
                     <div
                         class="absolute bottom-8 left-1 w-10 h-16 bg-gradient-to-r from-[#b0b0b0] to-[#e0e0e0] rounded-tl-3xl rounded-bl-sm shadow-[-5px_10px_15px_rgba(30,28,50,0.4)] z-0 transform -skew-y-12">
                     </div>
 
-                    <!-- Right Fin -->
                     <div
                         class="absolute bottom-8 right-1 w-10 h-16 bg-gradient-to-l from-[#909090] to-[#c0c0c0] rounded-tr-3xl rounded-br-sm shadow-[10px_10px_15px_rgba(30,28,50,0.5)] z-0 transform skew-y-12">
                     </div>
 
-                    <!-- Body -->
                     <div
                         class="absolute top-0 w-14 h-28 bg-gradient-to-r from-[#f0f0f0] via-white to-[#c0c0c0] rounded-t-[50%] rounded-b-xl shadow-[inset_-4px_0_10px_rgba(0,0,0,0.15),_10px_15px_20px_rgba(30,28,50,0.6)] z-10 border border-white/60 flex flex-col items-center pt-6">
-                        <!-- Window -->
                         <div
                             class="w-6 h-6 rounded-full bg-[#2E2C4D] shadow-[inset_3px_3px_6px_rgba(0,0,0,0.8),_0_2px_0_rgba(255,255,255,0.9)] border-2 border-[#8C89C7]">
                         </div>
                     </div>
 
-                    <!-- Engine Base -->
                     <div
                         class="absolute bottom-6 w-10 h-4 bg-gradient-to-b from-gray-400 to-gray-600 rounded-b-md z-0 shadow-inner">
                     </div>
-
-                    <!-- Engine Flame -->
                     <div
                         class="absolute bottom-0 w-8 h-10 bg-gradient-to-b from-yellow-300 via-orange-500 to-transparent blur-[2px] rounded-full animate-pulse z-0">
                     </div>
@@ -252,11 +233,9 @@
 
     </main>
 
-    <!-- ── OTHER HANDLES SECTION ── -->
     <section class="w-full max-w-5xl mt-6 mb-8">
         <div class="handles-section p-6 md:p-8">
 
-            <!-- Header -->
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center"
                     style="box-shadow:inset 2px 2px 5px rgba(0,0,0,0.35)">
@@ -269,10 +248,8 @@
                 </div>
             </div>
 
-            <!-- Bento Grid -->
             <div class="handles-grid">
 
-                <!-- Instagram -->
                 <a href="https://www.instagram.com/_k6thik_/" target="_blank" class="hcard hc-ig"
                     style="animation-delay:.05s">
                     <i class="fab fa-instagram hcard-icon"
@@ -284,7 +261,6 @@
                     <i class="fab fa-instagram hcard-bg-icon"></i>
                 </a>
 
-                <!-- X / Twitter -->
                 <a href="https://x.com/KarthikPar22109" target="_blank" class="hcard hc-x" style="animation-delay:.10s">
                     <span class="hcard-icon">
                         <svg viewBox="0 0 24 24" style="width:1.5rem;height:1.5rem;fill:white">
@@ -298,7 +274,6 @@
                     </div>
                 </a>
 
-                <!-- Reddit -->
                 <a href="https://www.reddit.com/user/karthik_p9/" target="_blank" class="hcard hc-reddit"
                     style="animation-delay:.15s">
                     <i class="fab fa-reddit-alien hcard-icon" style="color:#ff5a00"></i>
@@ -309,7 +284,6 @@
                     <i class="fab fa-reddit-alien hcard-bg-icon"></i>
                 </a>
 
-                <!-- Discord -->
                 <div onclick="navigator.clipboard.writeText('karthix9'); showToast('Discord tag karthix9 copied!');"
                     class="hcard hc-dc cursor-pointer" style="animation-delay:.20s">
                     <i class="fab fa-discord hcard-icon" style="color:#7983f5"></i>
@@ -326,19 +300,14 @@
         </div>
     </section>
 
-    <!-- ── BUY ME A COFFEE SECTION ── -->
     <section class="w-full max-w-5xl mb-12">
         <div class="bmc-section relative overflow-hidden">
 
-            <!-- Warm glow top-left -->
             <div class="absolute inset-0 pointer-events-none"
                 style="background: radial-gradient(ellipse at 10% 50%, rgba(255,186,8,0.07) 0%, transparent 60%);">
             </div>
-
-            <!-- Horizontal layout: left info, right action -->
             <div class="bmc-inner relative z-10">
 
-                <!-- Left: emoji + text -->
                 <div class="bmc-left">
                     <div class="bmc-icon-wrap">
                         <span class="bmc-coffee-emoji">☕</span>
@@ -353,7 +322,6 @@
                     </div>
                 </div>
 
-                <!-- Right: button -->
                 <button onclick="showToast('Buy me a coffee is currently not available!')"
                     class="bmc-btn cursor-pointer border-0 font-inherit">
                     <span class="bmc-btn-icon">☕</span>
